@@ -102,10 +102,11 @@ Bat2.save
 
 Bat3 = Movie.new
 Bat3["title"] = "The Dark Knight Rises"
-Bat3["year_released"] = "20"
+Bat3["year_released"] = "2012"
 Bat3["rated"] = "PG-13"
 Bat3["studio_id"] = Warner["id"]
 Bat3.save
+
 
 #Insert _ row of Actors
 Bale = Actor.new
@@ -182,13 +183,21 @@ S_Kyle["movie_id"] = Bat3["id"]
 S_Kyle["actor_id"] = Hathaway["id"]
 S_Kyle["character_name"] = "Selina Kyle"
 S_Kyle.save
-puts Role.all.inspect
-puts Role.all.count
 
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
-puts ""
+movies = Movie.where({"studio_id" => Warner["id"]})
+
+for movie in movies
+    title = movie["title"]
+    year = movie["year_released"]
+    rating = movie["rated"]
+    studio = Warner["name"]
+    
+    puts "#{title}      #{year}     #{rating}       #{studio}"
+end
+
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
