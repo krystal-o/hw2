@@ -80,7 +80,7 @@ Role.destroy_all
 # Insert data into the database that reflects the sample data shown above.
 # Do not use hard-coded foreign key IDs.
 # TODO!
-#Insert three rows of studios
+#Insert one row of studios
 Warner = Studio.new
 Warner["name"] = "Warner Bros"
 Warner.save
@@ -154,6 +154,66 @@ Hathaway["name"] = "Anne Hathaway"
 Hathaway.save
 
 #Insert _ rows of Roles
+B_Wayne1 = Role.new
+B_Wayne1["movie_id"] = Bat1["id"]
+B_Wayne1["actor_id"] = Bale["id"]
+B_Wayne1["character_name"] = "Bruce Wayne"
+B_Wayne1.save
+
+Alfred = Role.new
+Alfred["movie_id"] = Bat1["id"]
+Alfred["actor_id"] = Caine["id"]
+Alfred["character_name"] = "Alfred"
+Alfred.save
+
+Ghul = Role.new
+Ghul["movie_id"] = Bat1["id"]
+Ghul["actor_id"] = Neeson["id"]
+Ghul["character_name"] = "Ra's Al Ghul"
+Ghul.save
+
+R_Dawes = Role.new
+R_Dawes["movie_id"] = Bat1["id"]
+R_Dawes["actor_id"] = Holmes["id"]
+R_Dawes["character_name"] = "Rachel Dawes"
+R_Dawes.save
+
+C_Gordon1 = Role.new
+C_Gordon1["movie_id"] = Bat1["id"]
+C_Gordon1["actor_id"] = Oldman["id"]
+C_Gordon1["character_name"] = "Commissioner Gordon"
+C_Gordon1.save
+
+B_Wayne2 = Role.new
+B_Wayne2["movie_id"] = Bat2["id"]
+B_Wayne2["actor_id"] = Bale["id"]
+B_Wayne2["character_name"] = "Bruce Wayne"
+B_Wayne2.save
+
+Joker = Role.new
+Joker["movie_id"] = Bat2["id"]
+Joker["actor_id"] = Ledger["id"]
+Joker["character_name"] = "Joker"
+Joker.save
+
+Dent = Role.new
+Dent["movie_id"] = Bat2["id"]
+Dent["actor_id"] = Eckhart["id"]
+Dent["character_name"] = "Harvey Dent"
+Dent.save
+
+Alfred2 = Role.new
+Alfred2["movie_id"] = Bat2["id"]
+Alfred2["actor_id"] = Caine["id"]
+Alfred2["character_name"] = "Alfred"
+Alfred2.save
+
+R_Dawes2 = Role.new
+R_Dawes2["movie_id"] = Bat2["id"]
+R_Dawes2["actor_id"] = Gyllenhaal["id"]
+R_Dawes2["character_name"] = "Rachel Dawes"
+R_Dawes2.save
+
 Bruce_Wayne3 = Role.new
 Bruce_Wayne3["movie_id"] = Bat3["id"]
 Bruce_Wayne3["actor_id"] = Bale["id"]
@@ -163,7 +223,7 @@ Bruce_Wayne3.save
 C_Gordon3 = Role.new
 C_Gordon3["movie_id"] = Bat3["id"]
 C_Gordon3["actor_id"] = Oldman["id"]
-C_Gordon3["character_name"] = "Gary Oldman"
+C_Gordon3["character_name"] = "Commissioner Gordon"
 C_Gordon3.save
 
 Bane = Role.new
@@ -187,20 +247,13 @@ S_Kyle.save
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
-movies = Movie.where({"studio_id" => Warner["id"]})
-
-for movie in movies
-    title = movie["title"]
-    year = movie["year_released"]
-    rating = movie["rated"]
-    studio = Warner["name"]
-    
-    puts "#{title}      #{year}     #{rating}       #{studio}"
-end
-
-
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
+movies = Movie.all
+for movie in movies
+    studio = Studio.find_by({"id" => movie["studio_id"]})
+    puts "#{movie["title"]}     #{movie["year_release"]}    #{movie["rated"]}   #{studio["name"]}"
+end
 
 # Prints a header for the cast output
 puts ""
@@ -210,3 +263,11 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+roles = Role.all
+
+for role in roles
+    movie = Movie.find_by({"id" => role["movie_id"]})
+    actor = Actor.find_by({"id" => role["actor_id"]})
+    puts "#{movie["title"]}     #{actor["name"]}     #{role["character_name"]}"
+end
