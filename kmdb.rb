@@ -68,15 +68,122 @@
 # The Dark Knight Rises  Anne Hathaway         Selina Kyle
 
 # Delete existing data, so you'll start fresh each time this script is run.
-# Use `Model.destroy_all` code.
+Studio.destroy_all
+Movie.destroy_all
+Actor.destroy_all
+Role.destroy_all
 # TODO!
 
 # Generate models and tables, according to the domain model.
-# TODO!
+# TODO! check
 
 # Insert data into the database that reflects the sample data shown above.
 # Do not use hard-coded foreign key IDs.
 # TODO!
+#Insert three rows of studios
+Warner = Studio.new
+Warner["name"] = "Warner Bros"
+Warner.save
+
+#Insert three row of Movies
+Bat1 = Movie.new
+Bat1["title"] = "Batman Begins"
+Bat1["year_released"] = "2005"
+Bat1["rated"] = "PG-13"
+Bat1["studio_id"] = Warner["id"]
+Bat1.save
+
+Bat2 = Movie.new
+Bat2["title"] = "The Dark Knight"
+Bat2["year_released"] = "2008"
+Bat2["rated"] = "PG-13"
+Bat2["studio_id"] = Warner["id"]
+Bat2.save
+
+Bat3 = Movie.new
+Bat3["title"] = "The Dark Knight Rises"
+Bat3["year_released"] = "20"
+Bat3["rated"] = "PG-13"
+Bat3["studio_id"] = Warner["id"]
+Bat3.save
+
+#Insert _ row of Actors
+Bale = Actor.new
+Bale["name"] = "Christian Bale"
+Bale.save
+
+Caine = Actor.new
+Caine["name"] = "Michael Caine"
+Caine.save
+
+Neeson = Actor.new
+Neeson["name"] = "Liam Neeson"
+Neeson.save
+
+Holmes = Actor.new
+Holmes["name"] = "Katie Holmes"
+Holmes.save
+
+Oldman = Actor.new
+Oldman["name"] = "Gary Oldman"
+Oldman.save
+
+Ledger = Actor.new
+Ledger["name"] = "Heath Ledger"
+Ledger.save
+
+Eckhart = Actor.new
+Eckhart["name"] = "Aaron Eckhart"
+Eckhart.save
+
+Gyllenhaal = Actor.new
+Gyllenhaal["name"] = "Maggie Gyllenhaal"
+Gyllenhaal.save
+
+Hardy = Actor.new
+Hardy["name"] = "Tom Hardy"
+Hardy.save
+
+Gordon = Actor.new
+Gordon["name"] = "Joseph Gordon-Levitt"
+Gordon.save
+
+Hathaway = Actor.new
+Hathaway["name"] = "Anne Hathaway"
+Hathaway.save
+
+#Insert _ rows of Roles
+Bruce_Wayne3 = Role.new
+Bruce_Wayne3["movie_id"] = Bat3["id"]
+Bruce_Wayne3["actor_id"] = Bale["id"]
+Bruce_Wayne3["character_name"] = "Bruce Wayne"
+Bruce_Wayne3.save
+
+C_Gordon3 = Role.new
+C_Gordon3["movie_id"] = Bat3["id"]
+C_Gordon3["actor_id"] = Oldman["id"]
+C_Gordon3["character_name"] = "Gary Oldman"
+C_Gordon3.save
+
+Bane = Role.new
+Bane["movie_id"] = Bat3["id"]
+Bane["actor_id"] = Hardy["id"]
+Bane["character_name"] = "Bane"
+Bane.save
+
+J_Blake = Role.new
+J_Blake["movie_id"] = Bat3["id"]
+J_Blake["actor_id"] = Gordon["id"]
+J_Blake["character_name"] = "John Blake"
+J_Blake.save
+
+S_Kyle = Role.new
+S_Kyle["movie_id"] = Bat3["id"]
+S_Kyle["actor_id"] = Hathaway["id"]
+S_Kyle["character_name"] = "Selina Kyle"
+S_Kyle.save
+puts Role.all.inspect
+puts Role.all.count
 
 # Prints a header for the movies output
 puts "Movies"
